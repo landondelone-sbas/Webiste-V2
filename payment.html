@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Secure Payment — SBAS Info LLC</title>
+<meta name="description" content="Pay your SBAS Info LLC invoice or start a monthly retainer securely. Payments are processed by Stripe.">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        clay:'#E4E8EF', sunken:'#D7DCE5', ink:'#0F1B2D', ink2:'#3F4E63', ink3:'#526176',
+        teal:'#0B5563', tealdark:'#094551', danger:'#9B1C1C', success:'#166534'
+      },
+      fontFamily: { sans: ['Inter','system-ui','-apple-system','Segoe UI','sans-serif'] },
+      boxShadow: {
+        raise:'7px 7px 16px rgba(159,174,198,.55), -7px -7px 16px rgba(255,255,255,.92)',
+        'raise-sm':'4px 4px 9px rgba(159,174,198,.50), -4px -4px 9px rgba(255,255,255,.90)',
+        'raise-lg':'12px 12px 28px rgba(159,174,198,.55), -10px -10px 24px rgba(255,255,255,.92)',
+        inset:'inset 5px 5px 10px rgba(159,174,198,.55), inset -5px -5px 10px rgba(255,255,255,.90)',
+        'inset-sm':'inset 3px 3px 6px rgba(159,174,198,.50), inset -3px -3px 6px rgba(255,255,255,.88)',
+        cta:'5px 5px 12px rgba(159,174,198,.60), -4px -4px 12px rgba(255,255,255,.85)'
+      }
+    }
+  }
+}
+</script>
+<style>
+  body { background:#E4E8EF; }
+  .reveal { opacity:0; transform:translateY(14px); transition:opacity .5s ease-out, transform .5s ease-out; }
+  .reveal.is-visible { opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity:1; transform:none; transition:none; }
+    html { scroll-behavior:auto; }
+    * { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+    .spin { animation:none !important; }
+  }
+  :where(a,button,input,select,textarea,summary):focus-visible {
+    outline:3px solid #0B5563; outline-offset:3px; border-radius:6px;
+  }
+  .spin { animation:spin 900ms linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+</style>
+</head>
+
+<body class="font-sans text-ink antialiased">
+
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-4 focus:left-4 focus:bg-teal focus:text-white focus:px-5 focus:py-3 focus:rounded-xl focus:font-semibold">Skip to content</a>
+
+<header class="sticky top-0 z-40 bg-clay/90 backdrop-blur-sm">
+  <nav aria-label="Primary" class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4">
+    <a href="index.html" class="flex items-center gap-3 rounded-xl">
+      <span class="grid h-11 w-11 place-items-center rounded-2xl bg-teal text-base font-extrabold tracking-tight text-white shadow-cta">SB</span>
+      <span class="leading-tight">
+        <span class="block text-base font-bold tracking-tight text-ink">SBAS Info LLC</span>
+        <span class="block text-xs font-medium text-ink3">HIPAA Compliance Partners</span>
+      </span>
+    </a>
+    <div class="hidden items-center gap-1 md:flex">
+      <a href="index.html" class="rounded-xl px-4 py-2.5 text-sm font-semibold text-ink2 transition hover:text-ink hover:shadow-raise-sm">Home</a>
+      <a href="about.html" class="rounded-xl px-4 py-2.5 text-sm font-semibold text-ink2 transition hover:text-ink hover:shadow-raise-sm">About</a>
+      <a href="payment.html" aria-current="page" class="rounded-xl px-4 py-2.5 text-sm font-semibold text-ink shadow-inset-sm">Payment</a>
+      <a href="index.html#contact" class="ml-2 min-h-[44px] rounded-xl bg-teal px-5 py-2.5 text-sm font-bold text-white shadow-cta transition hover:bg-tealdark active:shadow-inset-sm">Book an assessment</a>
+    </div>
+    <button id="navToggle" type="button" aria-expanded="false" aria-controls="mobileNav"
+            class="grid h-11 w-11 place-items-center rounded-xl text-ink shadow-raise-sm transition active:shadow-inset-sm md:hidden">
+      <span class="sr-only">Open menu</span>
+      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
+    </button>
+  </nav>
+  <div id="mobileNav" hidden class="border-t border-white/60 px-5 pb-5 md:hidden">
+    <div class="flex flex-col gap-2 pt-4">
+      <a href="index.html" class="min-h-[44px] rounded-xl px-4 py-3 text-sm font-semibold text-ink2 shadow-raise-sm">Home</a>
+      <a href="about.html" class="min-h-[44px] rounded-xl px-4 py-3 text-sm font-semibold text-ink2 shadow-raise-sm">About</a>
+      <a href="payment.html" class="min-h-[44px] rounded-xl px-4 py-3 text-sm font-semibold text-ink shadow-inset-sm">Payment</a>
+      <a href="index.html#contact" class="min-h-[44px] rounded-xl bg-teal px-4 py-3 text-center text-sm font-bold text-white shadow-cta">Book an assessment</a>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="mx-auto max-w-4xl px-5 pb-20 pt-12 md:pt-16">
+
+  <div class="reveal text-center">
+    <p class="mb-4 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider text-teal shadow-inset-sm">
+      <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-linecap="round"/></svg>
+      Secured &amp; processed by Stripe
+    </p>
+    <h1 class="text-balance text-4xl font-extrabold leading-[1.12] tracking-tight text-ink sm:text-5xl">Make a payment</h1>
+    <p class="mx-auto mt-5 max-w-prose text-pretty text-lg leading-relaxed text-ink2">
+      Enter the reference number from your quote or invoice. We'll pull up the exact amount and terms you agreed to.
+    </p>
+  </div>
+
+  <!-- ══ STATE: LOOKUP ══════════════════════════════════════ -->
+  <section id="stepLookup" class="reveal mt-12">
+    <div class="rounded-[2.5rem] p-8 shadow-raise-lg sm:p-12">
+      <form id="lookupForm" novalidate class="mx-auto flex max-w-md flex-col gap-6">
+        <div>
+          <label for="invoiceRef" class="mb-2 block text-sm font-bold text-ink">Invoice or quote reference</label>
+          <input id="invoiceRef" name="invoiceRef" type="text" required inputmode="text"
+                 autocomplete="off" spellcheck="false"
+                 aria-describedby="refHelp"
+                 class="min-h-[52px] w-full rounded-2xl border-0 bg-clay px-5 text-center text-lg font-bold uppercase tracking-widest text-ink shadow-inset placeholder:font-normal placeholder:tracking-normal placeholder:text-ink3 focus:ring-0"
+                 placeholder="SBAS-0000">
+          <p id="refHelp" class="mt-2.5 text-xs leading-relaxed text-ink3">
+            Found at the top of the quote or invoice we emailed you. Case-insensitive.
+          </p>
+        </div>
+
+        <p id="lookupStatus" role="status" aria-live="polite" class="min-h-[1.25rem] text-center text-sm font-semibold"></p>
+
+        <button id="lookupBtn" type="submit"
+                class="inline-flex min-h-[52px] items-center justify-center gap-2.5 rounded-2xl bg-teal px-7 text-base font-bold text-white shadow-cta transition hover:bg-tealdark active:shadow-inset-sm disabled:cursor-not-allowed disabled:opacity-60">
+          <svg id="lookupSpinner" class="spin hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.2-8.6" stroke-linecap="round"/></svg>
+          <span id="lookupBtnLabel">Look up my invoice</span>
+        </button>
+
+        <p class="text-center text-xs leading-relaxed text-ink3">
+          Don't have a reference number?
+          <a href="index.html#contact" class="font-bold text-teal underline underline-offset-2">Contact us</a>
+          and we'll send one.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ══ STATE: CONFIRM ═════════════════════════════════════ -->
+  <section id="stepConfirm" hidden class="mt-12">
+    <div class="rounded-[2.5rem] p-8 shadow-raise-lg sm:p-12">
+      <h2 class="text-2xl font-extrabold tracking-tight text-ink">Confirm your payment</h2>
+      <p class="mt-2 text-sm text-ink2">Check these details before continuing to the secure card form.</p>
+
+      <dl class="mt-8 flex flex-col gap-3">
+        <div class="flex items-start justify-between gap-6 rounded-2xl p-5 shadow-inset-sm">
+          <dt class="text-sm font-semibold text-ink3">Reference</dt>
+          <dd id="sumRef" class="text-right text-sm font-bold text-ink"></dd>
+        </div>
+        <div class="flex items-start justify-between gap-6 rounded-2xl p-5 shadow-inset-sm">
+          <dt class="text-sm font-semibold text-ink3">Practice</dt>
+          <dd id="sumPractice" class="text-right text-sm font-bold text-ink"></dd>
+        </div>
+        <div class="flex items-start justify-between gap-6 rounded-2xl p-5 shadow-inset-sm">
+          <dt class="text-sm font-semibold text-ink3">Description</dt>
+          <dd id="sumDesc" class="max-w-xs text-right text-sm font-bold text-ink"></dd>
+        </div>
+        <div class="flex items-start justify-between gap-6 rounded-2xl p-5 shadow-inset-sm">
+          <dt class="text-sm font-semibold text-ink3">Payment type</dt>
+          <dd id="sumMode" class="text-right text-sm font-bold text-ink"></dd>
+        </div>
+        <div class="flex items-center justify-between gap-6 rounded-2xl bg-clay p-6 shadow-raise">
+          <dt class="text-base font-bold text-ink">Amount due</dt>
+          <dd class="text-right">
+            <span id="sumAmount" class="block text-3xl font-extrabold tracking-tight text-ink"></span>
+            <span id="sumCadence" class="mt-0.5 block text-xs font-semibold text-ink3"></span>
+          </dd>
+        </div>
+      </dl>
+
+      <p id="confirmStatus" role="status" aria-live="polite" class="mt-6 min-h-[1.25rem] text-sm font-semibold"></p>
+
+      <div class="mt-4 flex flex-col gap-3 sm:flex-row-reverse">
+        <button id="payBtn" type="button"
+                class="inline-flex min-h-[52px] flex-1 items-center justify-center gap-2.5 rounded-2xl bg-teal px-7 text-base font-bold text-white shadow-cta transition hover:bg-tealdark active:shadow-inset-sm disabled:cursor-not-allowed disabled:opacity-60">
+          <svg id="paySpinner" class="spin hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 12a9 9 0 1 1-6.2-8.6" stroke-linecap="round"/></svg>
+          <span id="payBtnLabel">Continue to secure payment</span>
+        </button>
+        <button id="backBtn" type="button"
+                class="inline-flex min-h-[52px] items-center justify-center rounded-2xl px-7 text-base font-bold text-ink shadow-raise transition hover:shadow-raise-lg active:shadow-inset">
+          Use a different reference
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ STATE: CHECKOUT ════════════════════════════════════ -->
+  <section id="stepCheckout" hidden class="mt-12">
+    <div class="rounded-[2.5rem] p-6 shadow-raise-lg sm:p-8">
+      <div class="mb-6 flex flex-wrap items-center justify-between gap-4 px-2">
+        <div>
+          <h2 class="text-lg font-bold tracking-tight text-ink">Secure card details</h2>
+          <p class="mt-1 text-xs font-medium text-ink3">Handled entirely by Stripe. SBAS never sees or stores your card number.</p>
+        </div>
+        <button id="cancelBtn" type="button"
+                class="min-h-[44px] rounded-xl px-4 text-sm font-bold text-ink2 shadow-raise-sm transition hover:text-ink active:shadow-inset-sm">
+          Cancel
+        </button>
+      </div>
+      <!-- Stripe Embedded Checkout mounts here -->
+      <div id="checkout" class="overflow-hidden rounded-3xl bg-white p-2 shadow-inset-sm min-h-[520px]"></div>
+    </div>
+  </section>
+
+  <!-- ══ STATE: RESULT ══════════════════════════════════════ -->
+  <section id="stepResult" hidden class="mt-12">
+    <div class="flex flex-col items-center gap-6 rounded-[2.5rem] p-10 text-center shadow-raise-lg sm:p-16">
+      <span id="resultIcon" class="grid h-20 w-20 place-items-center rounded-3xl shadow-cta" aria-hidden="true"></span>
+      <h2 id="resultTitle" class="text-balance text-3xl font-extrabold tracking-tight text-ink"></h2>
+      <p id="resultBody" class="max-w-prose text-pretty text-base leading-relaxed text-ink2"></p>
+      <div id="resultReceipt" hidden class="w-full max-w-sm rounded-2xl p-5 text-left shadow-inset-sm">
+        <dl class="flex flex-col gap-2 text-sm">
+          <div class="flex justify-between gap-4"><dt class="font-semibold text-ink3">Reference</dt><dd id="resRef" class="font-bold text-ink"></dd></div>
+          <div class="flex justify-between gap-4"><dt class="font-semibold text-ink3">Receipt sent to</dt><dd id="resEmail" class="font-bold text-ink"></dd></div>
+        </dl>
+      </div>
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <a href="index.html" class="inline-flex min-h-[52px] items-center justify-center rounded-2xl bg-teal px-8 text-base font-bold text-white shadow-cta transition hover:bg-tealdark active:shadow-inset-sm">Back to home</a>
+        <a id="resultRetry" href="payment.html" class="inline-flex min-h-[52px] items-center justify-center rounded-2xl px-8 text-base font-bold text-ink shadow-raise transition hover:shadow-raise-lg active:shadow-inset">Try again</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust strip -->
+  <ul class="reveal mt-10 grid gap-4 sm:grid-cols-3">
+    <li class="flex items-center gap-3 rounded-2xl p-5 shadow-inset-sm">
+      <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-teal text-white" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-linecap="round"/></svg>
+      </span>
+      <span class="text-sm font-bold leading-tight text-ink">PCI&nbsp;DSS Level&nbsp;1<span class="mt-0.5 block text-xs font-medium text-ink3">via Stripe</span></span>
+    </li>
+    <li class="flex items-center gap-3 rounded-2xl p-5 shadow-inset-sm">
+      <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-teal text-white" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="text-sm font-bold leading-tight text-ink">No card data stored<span class="mt-0.5 block text-xs font-medium text-ink3">on our servers</span></span>
+    </li>
+    <li class="flex items-center gap-3 rounded-2xl p-5 shadow-inset-sm">
+      <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-teal text-white" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="text-sm font-bold leading-tight text-ink">Instant email receipt<span class="mt-0.5 block text-xs font-medium text-ink3">for your records</span></span>
+    </li>
+  </ul>
+
+  <p class="mt-8 text-center text-xs leading-relaxed text-ink3">
+    Retainers renew monthly and can be cancelled any time from the billing portal link in your receipt.
+  </p>
+
+</main>
+
+<footer class="mx-auto max-w-6xl px-5 py-12">
+  <div class="flex flex-col gap-8 rounded-[2rem] p-8 shadow-inset-sm sm:p-10">
+    <div class="flex flex-col justify-between gap-8 sm:flex-row">
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="grid h-10 w-10 place-items-center rounded-xl bg-teal text-sm font-extrabold text-white">SB</span>
+          <span class="text-base font-bold tracking-tight text-ink">SBAS Info LLC</span>
+        </div>
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-ink2">
+          HIPAA Security Risk Assessments, workforce training, and site visit preparation for medical practices.
+        </p>
+      </div>
+      <nav aria-label="Footer" class="flex flex-col gap-3">
+        <a href="index.html" class="text-sm font-semibold text-ink2 transition hover:text-teal">Home</a>
+        <a href="about.html" class="text-sm font-semibold text-ink2 transition hover:text-teal">About us</a>
+        <a href="payment.html" class="text-sm font-semibold text-ink2 transition hover:text-teal">Make a payment</a>
+        <a href="index.html#contact" class="text-sm font-semibold text-ink2 transition hover:text-teal">Contact</a>
+      </nav>
+    </div>
+    <div class="flex flex-col gap-2 border-t border-white/70 pt-6 text-xs text-ink3 sm:flex-row sm:justify-between">
+      <p>&copy; <span id="year">2026</span> SBAS Info LLC. All rights reserved.</p>
+      <p>Informational only — not legal advice.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ════════════════════════════════════════════════════════════
+     CONFIGURATION — the only two lines you edit before launch.
+     ════════════════════════════════════════════════════════════ */
+  var STRIPE_PUBLISHABLE_KEY = 'pk_test_REPLACE_ME';
+  var API_BASE               = 'http://localhost:4242'; // '' if same origin
+
+  /* ════════════════════════════════════════════════════════════
+     BACKEND CONTRACT — server.js must implement exactly this.
+
+     GET  {API_BASE}/api/invoice/:ref
+       200 → { ref, practice, description, mode, amountCents, currency }
+             mode is "payment" (one-time) or "subscription" (retainer)
+       404 → { error: "not_found" }
+
+     POST {API_BASE}/api/create-checkout-session   body: { ref }
+       200 → { clientSecret }
+       The SERVER resolves ref → amount. The browser never sends a price.
+
+     GET  {API_BASE}/api/session-status?session_id=cs_...
+       200 → { status, paymentStatus, email, ref }
+     ════════════════════════════════════════════════════════════ */
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ── Mobile nav ─────────────────────────────────────────── */
+  var toggle = document.getElementById('navToggle');
+  var panel  = document.getElementById('mobileNav');
+  toggle.addEventListener('click', function () {
+    var open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    panel.hidden = open;
+  });
+
+  /* ── Scroll reveal ──────────────────────────────────────── */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items  = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('is-visible'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ── Element handles ────────────────────────────────────── */
+  var steps = {
+    lookup:   document.getElementById('stepLookup'),
+    confirm:  document.getElementById('stepConfirm'),
+    checkout: document.getElementById('stepCheckout'),
+    result:   document.getElementById('stepResult')
+  };
+  var lookupForm   = document.getElementById('lookupForm');
+  var refInput     = document.getElementById('invoiceRef');
+  var lookupBtn    = document.getElementById('lookupBtn');
+  var lookupSpin   = document.getElementById('lookupSpinner');
+  var lookupLabel  = document.getElementById('lookupBtnLabel');
+  var lookupStatus = document.getElementById('lookupStatus');
+  var payBtn       = document.getElementById('payBtn');
+  var paySpin      = document.getElementById('paySpinner');
+  var payLabel     = document.getElementById('payBtnLabel');
+  var confirmStat  = document.getElementById('confirmStatus');
+
+  var invoice = null;      // server-provided, never mutated client-side
+  var checkoutInstance = null;
+
+  function show(name) {
+    Object.keys(steps).forEach(function (k) { steps[k].hidden = (k !== name); });
+  }
+  function setStatus(el, message, kind) {
+    var tone = kind === 'error' ? 'text-danger' : kind === 'ok' ? 'text-success' : 'text-ink2';
+    el.className = el.id === 'lookupStatus'
+      ? 'min-h-[1.25rem] text-center text-sm font-semibold ' + tone
+      : 'mt-6 min-h-[1.25rem] text-sm font-semibold ' + tone;
+    el.textContent = message;
+  }
+  function busy(btn, spinner, label, isBusy, busyText, idleText) {
+    btn.disabled = isBusy;
+    spinner.classList.toggle('hidden', !isBusy);
+    label.textContent = isBusy ? busyText : idleText;
+  }
+  function money(cents, currency) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency', currency: (currency || 'usd').toUpperCase()
+    }).format(cents / 100);
+  }
+
+  /* ── STEP 1: look up the invoice ────────────────────────── */
+  lookupForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var ref = refInput.value.trim().toUpperCase();
+    if (!ref) {
+      setStatus(lookupStatus, 'Enter the reference number from your invoice.', 'error');
+      refInput.focus();
+      return;
+    }
+
+    busy(lookupBtn, lookupSpin, lookupLabel, true, 'Looking up…', 'Look up my invoice');
+    setStatus(lookupStatus, '', null);
+
+    fetch(API_BASE + '/api/invoice/' + encodeURIComponent(ref))
+      .then(function (r) {
+        if (r.status === 404) { throw new Error('not_found'); }
+        if (!r.ok)            { throw new Error('server'); }
+        return r.json();
+      })
+      .then(function (data) {
+        invoice = data;
+        renderConfirm(data);
+        show('confirm');
+        steps.confirm.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      })
+      .catch(function (err) {
+        setStatus(
+          lookupStatus,
+          err.message === 'not_found'
+            ? 'We couldn’t find that reference. Check for typos, or contact us for a new one.'
+            : 'We couldn’t reach the payment service. Please try again in a moment.',
+          'error'
+        );
+      })
+      .finally(function () {
+        busy(lookupBtn, lookupSpin, lookupLabel, false, '', 'Look up my invoice');
+      });
+  });
+
+  function renderConfirm(inv) {
+    var recurring = inv.mode === 'subscription';
+    document.getElementById('sumRef').textContent      = inv.ref;
+    document.getElementById('sumPractice').textContent = inv.practice;
+    document.getElementById('sumDesc').textContent     = inv.description;
+    document.getElementById('sumMode').textContent     = recurring ? 'Monthly retainer' : 'One-time project';
+    document.getElementById('sumAmount').textContent   = money(inv.amountCents, inv.currency);
+    document.getElementById('sumCadence').textContent  = recurring ? 'per month, until cancelled' : 'due today';
+    payLabel.textContent = recurring ? 'Continue to start retainer' : 'Continue to secure payment';
+  }
+
+  document.getElementById('backBtn').addEventListener('click', function () {
+    invoice = null;
+    setStatus(lookupStatus, '', null);
+    show('lookup');
+    refInput.focus();
+  });
+
+  /* ── STEP 2: create the session, mount Embedded Checkout ── */
+  payBtn.addEventListener('click', function () {
+    if (!invoice) { return; }
+
+    if (!window.Stripe || STRIPE_PUBLISHABLE_KEY.indexOf('REPLACE_ME') !== -1) {
+      setStatus(confirmStat, 'Payments are not configured yet. Set STRIPE_PUBLISHABLE_KEY in payment.html.', 'error');
+      return;
+    }
+
+    busy(payBtn, paySpin, payLabel, true, 'Preparing secure form…', '');
+    setStatus(confirmStat, '', null);
+
+    var stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+
+    stripe.initEmbeddedCheckout({
+      fetchClientSecret: function () {
+        return fetch(API_BASE + '/api/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ref: invoice.ref })   // ← amount NEVER sent from browser
+        })
+        .then(function (r) {
+          if (!r.ok) { throw new Error('session'); }
+          return r.json();
+        })
+        .then(function (d) { return d.clientSecret; });
+      }
+    })
+    .then(function (checkout) {
+      checkoutInstance = checkout;
+      show('checkout');
+      checkout.mount('#checkout');
+      steps.checkout.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    })
+    .catch(function () {
+      setStatus(confirmStat, 'We couldn’t open the secure payment form. Please try again, or contact us to pay by another method.', 'error');
+    })
+    .finally(function () {
+      busy(payBtn, paySpin, payLabel, false, '', invoice && invoice.mode === 'subscription'
+        ? 'Continue to start retainer' : 'Continue to secure payment');
+    });
+  });
+
+  document.getElementById('cancelBtn').addEventListener('click', function () {
+    if (checkoutInstance) { checkoutInstance.destroy(); checkoutInstance = null; }
+    show('confirm');
+  });
+
+  /* ── STEP 3: return from Stripe → show the result ────────── */
+  function renderResult(kind, title, body) {
+    var icon = document.getElementById('resultIcon');
+    var ok   = kind === 'ok';
+    icon.className = 'grid h-20 w-20 place-items-center rounded-3xl shadow-cta ' + (ok ? 'bg-success' : 'bg-danger');
+    icon.innerHTML = ok
+      ? '<svg viewBox="0 0 24 24" class="h-9 w-9 text-white" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+      : '<svg viewBox="0 0 24 24" class="h-9 w-9 text-white" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12 8v5M12 17h.01" stroke-linecap="round"/><circle cx="12" cy="12" r="9"/></svg>';
+    document.getElementById('resultTitle').textContent = title;
+    document.getElementById('resultBody').textContent  = body;
+    document.getElementById('resultRetry').hidden      = ok;
+    show('result');
+  }
+
+  var sessionId = new URLSearchParams(window.location.search).get('session_id');
+  if (sessionId) {
+    show('result');
+    renderResult('ok', 'Confirming your payment…', 'One moment while we verify this with Stripe.');
+    document.getElementById('resultIcon').className = 'grid h-20 w-20 place-items-center rounded-3xl bg-teal shadow-cta';
+    document.getElementById('resultIcon').innerHTML =
+      '<svg class="spin h-9 w-9 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-6.2-8.6" stroke-linecap="round"/></svg>';
+
+    fetch(API_BASE + '/api/session-status?session_id=' + encodeURIComponent(sessionId))
+      .then(function (r) { if (!r.ok) { throw new Error('status'); } return r.json(); })
+      .then(function (d) {
+        if (d.status === 'complete' || d.paymentStatus === 'paid') {
+          renderResult('ok', 'Payment received. Thank you.',
+            'Your payment is confirmed and a receipt is on its way. We’ll be in touch about next steps shortly.');
+          if (d.email || d.ref) {
+            document.getElementById('resultReceipt').hidden = false;
+            document.getElementById('resRef').textContent   = d.ref || '—';
+            document.getElementById('resEmail').textContent = d.email || '—';
+          }
+        } else if (d.status === 'open') {
+          renderResult('error', 'Payment not completed',
+            'The payment was started but not finished. Nothing has been charged. You can try again below.');
+        } else {
+          renderResult('error', 'We couldn’t confirm this payment',
+            'Nothing may have been charged. Please contact us before trying again so we don’t double-bill you.');
+        }
+      })
+      .catch(function () {
+        renderResult('error', 'We couldn’t verify the payment status',
+          'Your payment may still have succeeded. Please check your email for a receipt, or contact us before paying again.');
+      });
+  }
+})();
+</script>
+</body>
+</html>

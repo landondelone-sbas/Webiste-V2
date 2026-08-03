@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SBAS Info LLC — HIPAA Risk Assessment &amp; Site Visit Prep</title>
+<meta name="description" content="HIPAA Security Risk Assessments, staff training, and annual site visit preparation for medical practices. Audit-ready documentation without the six-week wait.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        clay:    '#E4E8EF',
+        sunken:  '#D7DCE5',
+        ink:     '#0F1B2D',
+        ink2:    '#3F4E63',
+        ink3:    '#526176',
+        teal:    '#0B5563',
+        tealdark:'#094551',
+        danger:  '#9B1C1C',
+        success: '#166534'
+      },
+      fontFamily: { sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'] },
+      boxShadow: {
+        raise:    '7px 7px 16px rgba(159,174,198,.55), -7px -7px 16px rgba(255,255,255,.92)',
+        'raise-sm':'4px 4px 9px rgba(159,174,198,.50), -4px -4px 9px rgba(255,255,255,.90)',
+        'raise-lg':'12px 12px 28px rgba(159,174,198,.55), -10px -10px 24px rgba(255,255,255,.92)',
+        inset:    'inset 5px 5px 10px rgba(159,174,198,.55), inset -5px -5px 10px rgba(255,255,255,.90)',
+        'inset-sm':'inset 3px 3px 6px rgba(159,174,198,.50), inset -3px -3px 6px rgba(255,255,255,.88)',
+        cta:      '5px 5px 12px rgba(159,174,198,.60), -4px -4px 12px rgba(255,255,255,.85)'
+      }
+    }
+  }
+}
+</script>
+<style>
+  body { background:#E4E8EF; }
+  /* Scroll reveal — disabled entirely under reduced-motion */
+  .reveal { opacity:0; transform:translateY(14px); transition:opacity .5s ease-out, transform .5s ease-out; }
+  .reveal.is-visible { opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity:1; transform:none; transition:none; }
+    html { scroll-behavior:auto; }
+    * { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+  }
+  /* Focus ring that survives on a low-contrast surface */
+  :where(a,button,input,select,textarea,summary):focus-visible {
+    outline:3px solid #0B5563; outline-offset:3px; border-radius:6px;
+  }
+</style>
+</head>
+
+<body class="font-sans text-ink antialiased">
+
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-4 focus:left-4 focus:bg-teal focus:text-white focus:px-5 focus:py-3 focus:rounded-xl focus:font-semibold">Skip to content</a>
+
+<!-- ══ HEADER ═══════════════════════════════════════════════ -->
+<header class="sticky top-0 z-40 bg-clay/90 backdrop-blur-sm">
+  <nav aria-label="Primary" class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4">
+    <a href="index.html" class="flex items-center gap-3 rounded-xl" aria-current="page">
+      <span class="grid h-11 w-11 place-items-center rounded-2xl bg-teal text-base font-extrabold tracking-tight text-white shadow-cta">SB</span>
+      <span class="leading-tight">
+        <span class="block text-base font-bold tracking-tight text-ink">SBAS Info LLC</span>
+        <span class="block text-xs font-medium text-ink3">HIPAA Compliance Partners</span>
+      </span>
+    </a>
+
+    <div class="hidden items-center gap-1 md:flex">
+      <a href="index.html" class="rounded-xl px-4 py-2.5 text-sm font-semibold text-ink shadow-inset-sm">Home</a>
+      <a href="about.html" class="rounded-xl px-4 py-2.5 text-sm font-semibold text-ink2 transition hover:text-ink hover:shadow-raise-sm">About</a>
+      <a href="payment.html" class="rounded-xl px-4 py-2.5 text-sm font-semibold text-ink2 transition hover:text-ink hover:shadow-raise-sm">Payment</a>
+      <a href="#contact" class="ml-2 min-h-[44px] rounded-xl bg-teal px-5 py-2.5 text-sm font-bold text-white shadow-cta transition hover:bg-tealdark active:shadow-inset-sm">Book an assessment</a>
+    </div>
+
+    <button id="navToggle" type="button" aria-expanded="false" aria-controls="mobileNav"
+            class="grid h-11 w-11 place-items-center rounded-xl text-ink shadow-raise-sm transition active:shadow-inset-sm md:hidden">
+      <span class="sr-only">Open menu</span>
+      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
+    </button>
+  </nav>
+
+  <div id="mobileNav" hidden class="border-t border-white/60 px-5 pb-5 md:hidden">
+    <div class="flex flex-col gap-2 pt-4">
+      <a href="index.html" class="min-h-[44px] rounded-xl px-4 py-3 text-sm font-semibold text-ink shadow-inset-sm">Home</a>
+      <a href="about.html" class="min-h-[44px] rounded-xl px-4 py-3 text-sm font-semibold text-ink2 shadow-raise-sm">About</a>
+      <a href="payment.html" class="min-h-[44px] rounded-xl px-4 py-3 text-sm font-semibold text-ink2 shadow-raise-sm">Payment</a>
+      <a href="#contact" class="min-h-[44px] rounded-xl bg-teal px-4 py-3 text-center text-sm font-bold text-white shadow-cta">Book an assessment</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ══ HERO ═════════════════════════════════════════════════ -->
+<section class="mx-auto max-w-6xl px-5 pb-16 pt-12 md:pb-24 md:pt-20">
+  <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_.95fr]">
+
+    <div class="reveal">
+      <p class="mb-5 inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider text-teal shadow-inset-sm">
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Security Risk Analysis · 45 CFR §164.308(a)(1)(ii)(A)
+      </p>
+
+      <h1 class="text-balance text-4xl font-extrabold leading-[1.1] tracking-tight text-ink sm:text-5xl lg:text-6xl">
+        Be audit&#8209;ready <span class="text-teal">before</span> anyone asks.
+      </h1>
+
+      <p class="mt-6 max-w-prose text-pretty text-lg leading-relaxed text-ink2">
+        SBAS Info LLC delivers the HIPAA Security Risk Assessment, staff training, and site&#8209;visit documentation your practice is required to have — as one continuous engagement, not three separate invoices and a six&#8209;week wait.
+      </p>
+
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <a href="#contact" class="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-2xl bg-teal px-7 text-base font-bold text-white shadow-cta transition hover:bg-tealdark active:shadow-inset-sm">
+          Schedule your assessment
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#compare" class="inline-flex min-h-[52px] items-center justify-center rounded-2xl px-7 text-base font-bold text-ink shadow-raise transition hover:shadow-raise-lg active:shadow-inset">
+          See how we compare
+        </a>
+      </div>
+
+      <dl class="mt-11 grid max-w-md grid-cols-3 gap-3">
+        <div class="rounded-2xl px-4 py-4 text-center shadow-inset-sm">
+          <dt class="sr-only">Typical turnaround</dt>
+          <dd><span class="block text-2xl font-extrabold tracking-tight text-ink">[[X]] days</span>
+              <span class="mt-1 block text-xs font-semibold leading-tight text-ink3">Typical turnaround</span></dd>
+        </div>
+        <div class="rounded-2xl px-4 py-4 text-center shadow-inset-sm">
+          <dt class="sr-only">Practices served</dt>
+          <dd><span class="block text-2xl font-extrabold tracking-tight text-ink">[[X]]+</span>
+              <span class="mt-1 block text-xs font-semibold leading-tight text-ink3">Practices served</span></dd>
+        </div>
+        <div class="rounded-2xl px-4 py-4 text-center shadow-inset-sm">
+          <dt class="sr-only">Deliverables included</dt>
+          <dd><span class="block text-2xl font-extrabold tracking-tight text-ink">3&nbsp;in&nbsp;1</span>
+              <span class="mt-1 block text-xs font-semibold leading-tight text-ink3">SRA · Training · Visit prep</span></dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Deliverables preview card -->
+    <div class="reveal">
+      <div class="rounded-[2rem] p-7 shadow-raise-lg sm:p-9">
+        <div class="mb-6 flex items-start justify-between gap-4">
+          <div>
+            <h2 class="text-lg font-bold tracking-tight text-ink">What lands in your inbox</h2>
+            <p class="mt-1 text-sm font-medium text-ink3">Every engagement, no upsell</p>
+          </div>
+          <span class="shrink-0 rounded-xl px-3 py-2 text-[11px] font-bold uppercase tracking-wide text-teal shadow-inset-sm">Included</span>
+        </div>
+
+        <ul class="flex flex-col gap-3">
+          <li class="flex items-start gap-4 rounded-2xl p-4 shadow-raise-sm">
+            <span class="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-teal text-white" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>
+              <span class="block text-sm font-bold text-ink">Full SRA report</span>
+              <span class="mt-0.5 block text-sm leading-relaxed text-ink2">Scored findings mapped to the Security Rule, written to survive an OCR request.</span>
+            </span>
+          </li>
+          <li class="flex items-start gap-4 rounded-2xl p-4 shadow-raise-sm">
+            <span class="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-teal text-white" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>
+              <span class="block text-sm font-bold text-ink">Prioritized remediation plan</span>
+              <span class="mt-0.5 block text-sm leading-relaxed text-ink2">Ranked by risk and effort, with owners and dates — not a list of 200 undifferentiated flags.</span>
+            </span>
+          </li>
+          <li class="flex items-start gap-4 rounded-2xl p-4 shadow-raise-sm">
+            <span class="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-teal text-white" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>
+              <span class="block text-sm font-bold text-ink">Staff training + attestations</span>
+              <span class="mt-0.5 block text-sm leading-relaxed text-ink2">Signed completion records filed and retrievable — the part practices most often can't produce.</span>
+            </span>
+          </li>
+        </ul>
+
+        <p class="mt-6 flex items-start gap-2 text-xs leading-relaxed text-ink3">
+          <svg viewBox="0 0 24 24" class="mt-px h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01" stroke-linecap="round"/></svg>
+          An SRA is required of every covered entity and business associate. It is not optional, and it is not a one&#8209;time task.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AGITATE & SOLVE ══════════════════════════════════════ -->
+<section id="compare" class="mx-auto max-w-6xl px-5 py-16 md:py-24">
+  <div class="reveal mx-auto max-w-2xl text-center">
+    <h2 class="text-balance text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+      Compliance shouldn't take eight weeks and three vendors.
+    </h2>
+    <p class="mt-5 text-pretty text-lg leading-relaxed text-ink2">
+      The traditional model hands you a PDF and walks away. You're left translating findings into actions, sourcing training separately, and rebuilding the whole evidence file before every site visit.
+    </p>
+  </div>
+
+  <div class="reveal mt-14 grid gap-6 lg:grid-cols-2">
+
+    <div class="rounded-[2rem] p-7 shadow-inset sm:p-9">
+      <h3 class="flex items-center gap-3 text-lg font-bold tracking-tight text-ink">
+        <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl text-danger shadow-raise-sm" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12" stroke-linecap="round"/></svg>
+        </span>
+        The traditional SRA firm
+      </h3>
+      <ul class="mt-6 flex flex-col gap-4">
+        <li class="flex gap-3 text-sm leading-relaxed text-ink2"><span class="font-bold text-danger" aria-hidden="true">—</span><span><strong class="font-bold text-ink">Two to eight weeks</strong> from kickoff to report, with the site visit clock already running.</span></li>
+        <li class="flex gap-3 text-sm leading-relaxed text-ink2"><span class="font-bold text-danger" aria-hidden="true">—</span><span><strong class="font-bold text-ink">Assessment only.</strong> Training and site-visit prep are separate scopes, separate vendors, separate invoices.</span></li>
+        <li class="flex gap-3 text-sm leading-relaxed text-ink2"><span class="font-bold text-danger" aria-hidden="true">—</span><span><strong class="font-bold text-ink">Report-and-run.</strong> Remediation support ends when the engagement closes.</span></li>
+        <li class="flex gap-3 text-sm leading-relaxed text-ink2"><span class="font-bold text-danger" aria-hidden="true">—</span><span><strong class="font-bold text-ink">Annual restart.</strong> Next year you re-onboard, re-explain your environment, re-pay full freight.</span></li>
+      </ul>
+    </div>
+
+    <div class="rounded-[2rem] p-7 shadow-raise-lg sm:p-9">
+      <h3 class="flex items-center gap-3 text-lg font-bold tracking-tight text-ink">
+        <span class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-teal text-white" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        SBAS Info LLC
+      </h3>
+      <ul class="mt-6 flex flex-col gap-4">
+        <li class="flex gap-3 text-sm leading-relaxed text-ink2"><span class="font-bold text-teal" aria-hidden="true">+</span><span><strong class="font-bold text-ink">One engagement.</strong> Assessment, training, and site-visit prep scoped and delivered together.</span></li>
+        <li class="flex gap-3 text-sm leading-relaxed text-ink2"><span class="font-bold text-teal" aria-hidden="true">+</span><span><strong class="font-bold text-ink">Findings arrive as tasks</strong>, ranked and assigned — so remediation starts the day you get the report.</span></li>
+        <li class="flex gap-3 text-sm leading-relaxed text-ink2"><span class="font-bold text-teal" aria-hidden="true">+</span><span><strong class="font-bold text-ink">Retainer option.</strong> We hold your evidence file year-round and keep it current between assessments.</span></li>
+        <li class="flex gap-3 text-sm leading-relaxed text-ink2"><span class="font-bold text-teal" aria-hidden="true">+</span><span><strong class="font-bold text-ink">Transparent, negotiated pricing.</strong> Scoped to your practice size, paid securely online.</span></li>
+      </ul>
+      <a href="#services" class="mt-8 inline-flex min-h-[48px] items-center gap-2 rounded-2xl bg-teal px-6 text-sm font-bold text-white shadow-cta transition hover:bg-tealdark active:shadow-inset-sm">
+        Explore the services
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ═════════════════════════════════════════════ -->
+<section id="services" class="mx-auto max-w-6xl px-5 py-16 md:py-24">
+  <div class="reveal mx-auto max-w-2xl text-center">
+    <p class="mb-4 text-xs font-bold uppercase tracking-[.16em] text-teal">What we do</p>
+    <h2 class="text-balance text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">Three services. One accountable partner.</h2>
+    <p class="mt-5 text-pretty text-lg leading-relaxed text-ink2">Engage any one of them, or all three as a single scope of work.</p>
+  </div>
+
+  <ul class="mt-14 grid gap-6 md:grid-cols-3">
+
+    <li class="reveal group flex flex-col rounded-[2rem] p-7 shadow-raise transition duration-200 hover:shadow-raise-lg">
+      <span class="grid h-14 w-14 place-items-center rounded-2xl bg-teal text-white shadow-cta" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <h3 class="mt-6 text-xl font-bold tracking-tight text-ink">Risk Assessment Analysis</h3>
+      <p class="mt-3 flex-1 text-sm leading-relaxed text-ink2">
+        A full Security Risk Analysis of your administrative, physical, and technical safeguards. We inventory where ePHI lives, test the controls around it, score each gap by likelihood and impact, and hand you a remediation plan you can actually execute.
+      </p>
+      <ul class="mt-6 flex flex-col gap-2 border-t border-white/70 pt-5 text-sm font-medium text-ink3">
+        <li class="flex gap-2"><span class="text-teal" aria-hidden="true">›</span>ePHI data-flow inventory</li>
+        <li class="flex gap-2"><span class="text-teal" aria-hidden="true">›</span>Scored findings + risk register</li>
+        <li class="flex gap-2"><span class="text-teal" aria-hidden="true">›</span>Written remediation roadmap</li>
+      </ul>
+    </li>
+
+    <li class="reveal group flex flex-col rounded-[2rem] p-7 shadow-raise transition duration-200 hover:shadow-raise-lg">
+      <span class="grid h-14 w-14 place-items-center rounded-2xl bg-teal text-white shadow-cta" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10 12 5 2 10l10 5 10-5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <h3 class="mt-6 text-xl font-bold tracking-tight text-ink">HIPAA Training &amp; Compliance</h3>
+      <p class="mt-3 flex-1 text-sm leading-relaxed text-ink2">
+        Workforce training that fits a clinical schedule, plus the policy set and signed attestations behind it. Because in an audit, the training isn't what counts — the documentation proving the training happened is.
+      </p>
+      <ul class="mt-6 flex flex-col gap-2 border-t border-white/70 pt-5 text-sm font-medium text-ink3">
+        <li class="flex gap-2"><span class="text-teal" aria-hidden="true">›</span>Role-appropriate staff sessions</li>
+        <li class="flex gap-2"><span class="text-teal" aria-hidden="true">›</span>Policy &amp; procedure templates</li>
+        <li class="flex gap-2"><span class="text-teal" aria-hidden="true">›</span>Attestation tracking &amp; retention</li>
+      </ul>
+    </li>
+
+    <li class="reveal group flex flex-col rounded-[2rem] p-7 shadow-raise transition duration-200 hover:shadow-raise-lg">
+      <span class="grid h-14 w-14 place-items-center rounded-2xl bg-teal text-white shadow-cta" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round"/><path d="M9 16l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <h3 class="mt-6 text-xl font-bold tracking-tight text-ink">Annual Site Visit Prep</h3>
+      <p class="mt-3 flex-1 text-sm leading-relaxed text-ink2">
+        A structured dry run before the real thing. We assemble the evidence binder, walk your physical safeguards, rehearse the questions your staff will be asked, and close the gaps while there's still time to close them.
+      </p>
+      <ul class="mt-6 flex flex-col gap-2 border-t border-white/70 pt-5 text-sm font-medium text-ink3">
+        <li class="flex gap-2"><span class="text-teal" aria-hidden="true">›</span>Evidence binder assembly</li>
+        <li class="flex gap-2"><span class="text-teal" aria-hidden="true">›</span>Mock walkthrough &amp; interviews</li>
+        <li class="flex gap-2"><span class="text-teal" aria-hidden="true">›</span>Gap closure before the visit</li>
+      </ul>
+    </li>
+  </ul>
+</section>
+
+<!-- ══ PROCESS ══════════════════════════════════════════════ -->
+<section class="mx-auto max-w-6xl px-5 py-16 md:py-24">
+  <div class="reveal rounded-[2.5rem] p-8 shadow-inset sm:p-12 lg:p-16">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="mb-4 text-xs font-bold uppercase tracking-[.16em] text-teal">How it works</p>
+      <h2 class="text-balance text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">Four steps, no mystery.</h2>
+    </div>
+
+    <ol class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      <li class="rounded-2xl bg-clay p-6 shadow-raise-sm">
+        <span class="grid h-10 w-10 place-items-center rounded-xl bg-teal text-sm font-extrabold text-white">1</span>
+        <h3 class="mt-4 text-base font-bold text-ink">Scoping call</h3>
+        <p class="mt-2 text-sm leading-relaxed text-ink2">We size the engagement to your practice — locations, headcount, systems. You get a fixed, negotiated quote.</p>
+      </li>
+      <li class="rounded-2xl bg-clay p-6 shadow-raise-sm">
+        <span class="grid h-10 w-10 place-items-center rounded-xl bg-teal text-sm font-extrabold text-white">2</span>
+        <h3 class="mt-4 text-base font-bold text-ink">Assessment</h3>
+        <p class="mt-2 text-sm leading-relaxed text-ink2">Documentation review, technical testing, and staff interviews. Minimal disruption to clinic hours.</p>
+      </li>
+      <li class="rounded-2xl bg-clay p-6 shadow-raise-sm">
+        <span class="grid h-10 w-10 place-items-center rounded-xl bg-teal text-sm font-extrabold text-white">3</span>
+        <h3 class="mt-4 text-base font-bold text-ink">Report &amp; plan</h3>
+        <p class="mt-2 text-sm leading-relaxed text-ink2">Scored findings and a prioritized remediation plan, walked through with you line by line.</p>
+      </li>
+      <li class="rounded-2xl bg-clay p-6 shadow-raise-sm">
+        <span class="grid h-10 w-10 place-items-center rounded-xl bg-teal text-sm font-extrabold text-white">4</span>
+        <h3 class="mt-4 text-base font-bold text-ink">Ongoing support</h3>
+        <p class="mt-2 text-sm leading-relaxed text-ink2">Optional monthly retainer: we keep the evidence file current so next year isn't a fire drill.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══ LEAD CAPTURE ═════════════════════════════════════════ -->
+<section id="contact" class="mx-auto max-w-6xl px-5 py-16 md:py-24">
+  <div class="reveal grid gap-10 rounded-[2.5rem] p-8 shadow-raise-lg sm:p-12 lg:grid-cols-[1fr_1fr] lg:gap-16 lg:p-16">
+
+    <div>
+      <h2 class="text-balance text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">Start with a scoping call.</h2>
+      <p class="mt-5 text-pretty text-lg leading-relaxed text-ink2">
+        Fifteen minutes, no cost, no obligation. Tell us about your practice and we'll tell you honestly what you need — and what you don't.
+      </p>
+
+      <dl class="mt-9 flex flex-col gap-4">
+        <div class="flex items-center gap-4 rounded-2xl p-4 shadow-inset-sm">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-teal text-white" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div>
+            <dt class="text-xs font-bold uppercase tracking-wide text-ink3">Phone</dt>
+            <dd><a href="tel:[[PHONE]]" class="text-sm font-bold text-ink transition hover:text-teal">[[PHONE NUMBER]]</a></dd>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 rounded-2xl p-4 shadow-inset-sm">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-teal text-white" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div>
+            <dt class="text-xs font-bold uppercase tracking-wide text-ink3">Email</dt>
+            <dd><a href="mailto:[[EMAIL]]" class="text-sm font-bold text-ink transition hover:text-teal">[[EMAIL ADDRESS]]</a></dd>
+          </div>
+        </div>
+      </dl>
+    </div>
+
+    <!-- action must be replaced with a real form endpoint; see README -->
+    <form id="leadForm" class="flex flex-col gap-5" novalidate>
+      <div>
+        <label for="name" class="mb-2 block text-sm font-bold text-ink">Your name</label>
+        <input id="name" name="name" type="text" autocomplete="name" required
+               class="min-h-[48px] w-full rounded-2xl border-0 bg-clay px-5 text-sm text-ink shadow-inset placeholder:text-ink3 focus:ring-0"
+               placeholder="Jane Okafor">
+      </div>
+      <div>
+        <label for="practice" class="mb-2 block text-sm font-bold text-ink">Practice name</label>
+        <input id="practice" name="practice" type="text" autocomplete="organization" required
+               class="min-h-[48px] w-full rounded-2xl border-0 bg-clay px-5 text-sm text-ink shadow-inset placeholder:text-ink3 focus:ring-0"
+               placeholder="Riverbend Family Medicine">
+      </div>
+      <div>
+        <label for="email" class="mb-2 block text-sm font-bold text-ink">Work email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required
+               class="min-h-[48px] w-full rounded-2xl border-0 bg-clay px-5 text-sm text-ink shadow-inset placeholder:text-ink3 focus:ring-0"
+               placeholder="jane@riverbendfm.com">
+      </div>
+      <div>
+        <label for="need" class="mb-2 block text-sm font-bold text-ink">What do you need?</label>
+        <select id="need" name="need"
+                class="min-h-[48px] w-full rounded-2xl border-0 bg-clay px-5 text-sm text-ink shadow-inset focus:ring-0">
+          <option>Security Risk Assessment</option>
+          <option>HIPAA training &amp; compliance</option>
+          <option>Annual site visit prep</option>
+          <option>All three / not sure yet</option>
+        </select>
+      </div>
+
+      <p id="formStatus" role="status" aria-live="polite" class="min-h-[1.25rem] text-sm font-semibold"></p>
+
+      <button type="submit"
+              class="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-2xl bg-teal px-7 text-base font-bold text-white shadow-cta transition hover:bg-tealdark active:shadow-inset-sm disabled:cursor-not-allowed disabled:opacity-60">
+        Request my scoping call
+      </button>
+
+      <p class="text-xs leading-relaxed text-ink3">
+        We never ask for PHI through this form. Submitting sends only the details above.
+      </p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ══ FOOTER ═══════════════════════════════════════════════ -->
+<footer class="mx-auto max-w-6xl px-5 py-12">
+  <div class="flex flex-col gap-8 rounded-[2rem] p-8 shadow-inset-sm sm:p-10">
+    <div class="flex flex-col justify-between gap-8 sm:flex-row">
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="grid h-10 w-10 place-items-center rounded-xl bg-teal text-sm font-extrabold text-white">SB</span>
+          <span class="text-base font-bold tracking-tight text-ink">SBAS Info LLC</span>
+        </div>
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-ink2">
+          HIPAA Security Risk Assessments, workforce training, and site visit preparation for medical practices.
+        </p>
+      </div>
+      <nav aria-label="Footer" class="flex flex-col gap-3">
+        <a href="index.html" class="text-sm font-semibold text-ink2 transition hover:text-teal">Home</a>
+        <a href="about.html" class="text-sm font-semibold text-ink2 transition hover:text-teal">About us</a>
+        <a href="payment.html" class="text-sm font-semibold text-ink2 transition hover:text-teal">Make a payment</a>
+        <a href="#contact" class="text-sm font-semibold text-ink2 transition hover:text-teal">Contact</a>
+      </nav>
+    </div>
+    <div class="flex flex-col gap-2 border-t border-white/70 pt-6 text-xs text-ink3 sm:flex-row sm:justify-between">
+      <p>&copy; <span id="year">2026</span> SBAS Info LLC. All rights reserved.</p>
+      <p>Informational only — not legal advice.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* Mobile nav */
+  var toggle = document.getElementById('navToggle');
+  var panel  = document.getElementById('mobileNav');
+  toggle.addEventListener('click', function () {
+    var open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    panel.hidden = open;
+  });
+
+  /* Scroll reveal — skipped entirely when the user prefers reduced motion */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items  = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('is-visible'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  /* Lead form — client-side validation only.
+     Wire `action`/`fetch` to a real endpoint before launch (see README). */
+  var form   = document.getElementById('leadForm');
+  var status = document.getElementById('formStatus');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      status.className = 'min-h-[1.25rem] text-sm font-semibold text-danger';
+      status.textContent = 'Please complete every field with a valid work email.';
+      form.reportValidity();
+      return;
+    }
+    status.className = 'min-h-[1.25rem] text-sm font-semibold text-danger';
+    status.textContent = 'Form endpoint not connected yet — see README step 3.';
+  });
+})();
+</script>
+</body>
+</html>

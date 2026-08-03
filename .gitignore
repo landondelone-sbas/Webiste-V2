@@ -1,0 +1,31 @@
+# ─── Secrets ──────────────────────────────────────────────────
+# NEVER commit these. .env holds your Stripe SECRET key.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ─── Dependencies ─────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-error.log*
+package-lock.json.bak
+
+# ─── Build output ─────────────────────────────────────────────
+dist/
+build/
+*.min.css.map
+
+# ─── OS / editor cruft ────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+
+# ─── Logs ─────────────────────────────────────────────────────
+logs/
+*.log
